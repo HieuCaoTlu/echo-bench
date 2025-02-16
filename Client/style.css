@@ -1,0 +1,48 @@
+/* Thiết lập mặc định cho trang */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+/* Hộp chứa thanh chat */
+#chat-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 10px;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Ô nhập nội dung chat */
+#chat-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    width: 250px;
+}
+
+/* Thiết lập chung cho các nút */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Icon trong các nút */
+button img {
+    width: 24px;
+    height: 24px;
+}
