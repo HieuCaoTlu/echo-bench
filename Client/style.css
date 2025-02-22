@@ -1,48 +1,128 @@
-/* Thiết lập mặc định cho trang */
+@font-face {
+    font-family: 'PixelFont';
+    src: url('./assets/fonts/pixel-font.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin: 0;
     padding: 0;
+    background-size: cover;
+    font-family: 'PixelFont', sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     height: 100vh;
-    background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
 }
 
-/* Hộp chứa thanh chat */
 #chat-container {
+    width: 80%;
+    max-width: 407px;
     position: fixed;
-    bottom: 20px;
+    bottom: -100px;
+    opacity: 0;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    gap: 10px;
-    background: white;
-    padding: 10px;
-    border-radius: 25px;
+    gap: 12px; /* Tạo khoảng cách giữa các phần tử */
+    background: rgba(255, 255, 255, 0.85);
+    padding: 8px 15px;
+    border-radius: 15px; /* Giảm độ bo tròn */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: bottom 0.6s ease-out, opacity 0.6s ease-out;
 }
 
-/* Ô nhập nội dung chat */
+#chat-container.visible {
+    bottom: 20px; /* Hiện lên vị trí đúng */
+    opacity: 1;
+}
+
 #chat-input {
-    padding: 8px;
+    font-size: 10px;
+    padding: 6px 12px;
     border: 1px solid #ccc;
-    border-radius: 20px;
-    outline: none;
-    width: 250px;
+    border-radius: 10px;
+    background: transparent;
+    outline: black;
+    width: 320px; 
+    background: rgba(255, 255, 255, 0.7);
+    font-family: "PixelFont";
 }
 
-/* Thiết lập chung cho các nút */
+#pixel-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.pixel {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    animation: move 1s forwards;
+}
+
+@keyframes move {
+    to {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+
+
 button {
     background: none;
     border: none;
     cursor: pointer;
 }
 
-/* Icon trong các nút */
-button img {
-    width: 24px;
+.chat-button img {
+    width: 24px; /* Giảm kích thước icon */
     height: 24px;
+    cursor: pointer;
+    outline: none;
+    background: none;
+    border: none;
+    transition: transform 0.3s cubic-bezier(0.25, 1.5, 0.5, 1);
 }
+
+.chat-button img:hover {
+    transform: translateY(-8px);
+    transform: scale(1.5,1.5);
+}
+
+#chat-input:focus {
+    border-color: #ff9800;
+    box-shadow: 0 0 10px rgba(255, 152, 0, 0.6);
+}
+
+
+.pixel {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #ff9800;
+    opacity: 0.9;
+    animation: pixel-typing-animation 0.6s ease-out forwards;
+}
+
+
+@keyframes pixel-typing-animation {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y)) scale(1.5);
+        opacity: 0;
+    }
+}
+
