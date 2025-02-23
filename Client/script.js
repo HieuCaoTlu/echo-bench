@@ -23,53 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Xử lý nhập tin nhắn
     chatInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter" && chatInput.value.trim() !== "") {
-            createPixelEffect();
             playRandomAudio();
             changeBackground();
             chatInput.value = "";
         }
     });
 
-    function createPixelEffect() {
-        const chatContainer = document.getElementById("chat-container");
-        const pixelEffect = document.getElementById("pixel-effect");
-    
-        // Lấy vị trí thực tế của chat box
-        requestAnimationFrame(() => {
-            const boxRect = chatContainer.getBoundingClientRect();
-            const centerX = boxRect.left + boxRect.width / 2;
-            const centerY = boxRect.top + boxRect.height / 2;
-    
-            for (let i = 0; i < 20; i++) {
-                const pixel = document.createElement("div");
-                pixel.classList.add("pixel");
-    
-                // Đặt pixel xuất phát từ chat box
-                pixel.style.left = '20px';
-                pixel.style.top = '20px';
-    
-                // Hướng bay ngẫu nhiên (lên, xuống, trái, phải)
-                const angle = Math.random() * 2 * Math.PI;
-                const distance = Math.random() * 80 + 40;
-                const moveX = Math.cos(angle) * distance;
-                const moveY = Math.sin(angle) * distance;
-    
-                pixel.style.setProperty("--x", `${moveX}px`);
-                pixel.style.setProperty("--y", `${moveY}px`);
-    
-                // Màu sắc ngẫu nhiên
-                const colors = ["#ffcc00", "#ff5733", "#33ff57", "#5733ff", "#ff33aa"];
-                pixel.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    
-                pixelEffect.appendChild(pixel);
-    
-                // Xóa pixel sau khi animation kết thúc
-                setTimeout(() => pixel.remove(), 1000);
-            }
-        });
-    }
-    
-    
+       
 
     // Xử lý đổi nền
     function changeBackground() {
@@ -79,11 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
         } while (document.body.style.backgroundImage.includes(newBg));
 
         document.body.style.transition = "background 2s ease-in-out, opacity 1s ease-in-out";
-        document.body.style.opacity = "0.3";
+        document.body.style.opacity = "0.1";
         setTimeout(() => {
             document.body.style.backgroundImage = `url('${newBg}')`;
             document.body.style.opacity = "1";
-        }, 300);
+        }, 100);
     }
 
 

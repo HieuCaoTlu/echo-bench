@@ -9,6 +9,7 @@ body {
     margin: 0;
     padding: 0;
     background-size: cover;
+    background-position: center;
     font-family: 'PixelFont', sans-serif;
     display: flex;
     justify-content: center;
@@ -29,7 +30,7 @@ body {
     gap: 12px; /* Tạo khoảng cách giữa các phần tử */
     background: rgba(255, 255, 255, 0.85);
     padding: 8px 15px;
-    border-radius: 15px; /* Giảm độ bo tròn */
+    border-radius: 15px; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     transition: bottom 0.6s ease-out, opacity 0.6s ease-out;
@@ -52,31 +53,6 @@ body {
     font-family: "PixelFont";
 }
 
-#pixel-effect {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.pixel {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    animation: move 1s forwards;
-}
-
-@keyframes move {
-    to {
-        transform: translate(var(--x), var(--y));
-        opacity: 0;
-    }
-}
-
 
 button {
     background: none;
@@ -85,7 +61,7 @@ button {
 }
 
 .chat-button img {
-    width: 24px; /* Giảm kích thước icon */
+    width: 24px; 
     height: 24px;
     cursor: pointer;
     outline: none;
@@ -105,24 +81,6 @@ button {
 }
 
 
-.pixel {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background-color: #ff9800;
-    opacity: 0.9;
-    animation: pixel-typing-animation 0.6s ease-out forwards;
-}
 
 
-@keyframes pixel-typing-animation {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(var(--x), var(--y)) scale(1.5);
-        opacity: 0;
-    }
-}
 
