@@ -1,12 +1,22 @@
-export const songs = [
-    {
-        "title": "Lost in Dreams",
-        "artist": "Unknown",
-        "file": "assets/bgm/audio/music1.mp3"
-    },
-    {
-        "title": "Chill Lofi Music",
-        "artist": "Unknown",
-        "file": "assets/bgm/audio/music2.mp3"
-    },
-];
+export const songs = {
+    happy: [
+        {
+            "title": "Lost in Dreams",
+            "artist": "Unknown",
+            "file": "assets/audio/happy/music1.mp3"
+        },
+        {
+            "title": "Chill Lofi Music",
+            "artist": "Unknown",
+            "file": "assets/audio/happy/music2.mp3"
+        }
+    ],
+    sad: [
+        {
+            "title": "Melancholy Night",
+            "artist": "Unknown",
+            "file": "assets/audio/sad/music1.mp3"
+        }
+    ]
+};
+

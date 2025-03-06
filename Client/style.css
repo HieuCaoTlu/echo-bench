@@ -1,84 +1,526 @@
 @font-face {
     font-family: 'PixelFont';
     src: url('./assets/fonts/pixel-font.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
 }
 
 body {
-    margin: 0;
-    padding: 0;
+    font-family: 'PixelFont', cursive;
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
     background-size: cover;
     background-position: center;
-    font-family: 'PixelFont', sans-serif;
+    color: white;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    margin: 0;
+    flex-direction: column;
+    transition: opacity 1s ease-in-out;
+    filter: brightness(100%);
+    position: relative;
+    background: none; /* Xóa nền của body */
 }
+
+
+@keyframes fadeInBackground {
+    from {
+        opacity: 0.95;
+        transform: scale(1.1); /* Phóng to nhẹ */
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOutBackground {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0.95;
+        transform: scale(1.05); /* Thu nhỏ nhẹ khi biến mất */
+    }
+}
+
+#background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Đưa background xuống dưới tất cả nội dung */
+    
+    animation: fadeInBackground 1.5s ease-in-out;
+}
+
+
+
+
+#title {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 5%;
+    left: 38.7%; 
+    font-family: 'PixelFont', cursive;
+    font-size: 30px;
+    color: white;
+    background: transparent;
+    padding: 10px 20px;
+    text-align: center;
+    text-transform: uppercase;
+
+    opacity: 0; /* Ẩn ban đầu để tránh hiển thị sai vị trí */
+    animation: fadeIn 1.5s ease-in-out forwards;
+}
+
+/* Hiệu ứng mờ dần */
+@keyframes fadeIn {
+    from { opacity: 0; } /* Không đổi vị trí */
+    to { opacity: 1; }   /* Chỉ thay đổi độ mờ */
+}
+
+
 
 #chat-container {
+    position: absolute;
+    bottom: 2px; 
+    left: 50%;  /* Đưa điểm gốc của phần tử vào giữa */
+    transform: translateX(-50%); /* Dịch ngược lại 50% chiều rộng để căn giữa */
+    background: #1e293b;
+    padding: 15px;
+    text-align: center;
     width: 80%;
-    max-width: 407px;
-    position: fixed;
-    bottom: -100px;
-    opacity: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 12px; /* Tạo khoảng cách giữa các phần tử */
-    background: rgba(255, 255, 255, 0.85);
-    padding: 8px 15px;
-    border-radius: 15px; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    transition: bottom 0.6s ease-out, opacity 0.6s ease-out;
-}
-
-#chat-container.visible {
-    bottom: 20px; /* Hiện lên vị trí đúng */
-    opacity: 1;
-}
-
-#chat-input {
-    font-size: 10px;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
+    max-width: 400px;
     border-radius: 10px;
-    background: transparent;
-    outline: black;
-    width: 320px; 
-    background: rgba(255, 255, 255, 0.7);
-    font-family: "PixelFont";
+    background-color: transparent;
 }
 
-
-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.chat-button img {
-    width: 24px; 
-    height: 24px;
-    cursor: pointer;
+/* Ô nhập chat */
+#chat-input {
+    width: 110%;
+    padding: 10px;
+    background: #1e293b;
+    color: white;
+    font-family: 'PixelFont', cursive;
+    font-size: 20px;
+    text-align: center;
     outline: none;
-    background: none;
-    border: none;
-    transition: transform 0.3s cubic-bezier(0.25, 1.5, 0.5, 1);
+    background-color: transparent;
+    border: transparent;
 }
 
-.chat-button img:hover {
-    transform: translateY(-8px);
-    transform: scale(1.5,1.5);
+#chat-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 #chat-input:focus {
-    border-color: #ff9800;
-    box-shadow: 0 0 10px rgba(255, 152, 0, 0.6);
+    background: #334155;
+    border-color: #38bdf8;
+    background-color: transparent;
 }
+
+/* Chữ nhỏ bên dưới ô nhập */
+.subtext {
+    font-size: 10px;
+    opacity: 0.8;
+    margin-top: 1px;
+    margin-left: 50px;
+}
+
+/* Container chứa các nút */
+#button-container {
+    bottom: 30px;
+    left: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    position: fixed;
+}
+
+/* Nút bấm */
+.button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+    position: relative;
+    background-color: transparent;
+}
+
+/* Ẩn tooltip mặc định */
+.tooltip {
+    position: absolute;
+    bottom: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    background: transparent;
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Khi hover vào nút, hiển thị tooltip */
+.button:hover .tooltip {
+    opacity: 1;
+    background-color: transparent;
+    border: transparent;
+}
+
+/* Hiệu ứng hover cho nút */
+.button:hover {
+    background: transparent;
+    transform: scale(1.1);
+}
+
+.button img {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* Container chứa các icon cảm xúc */
+.select-background{
+    position: absolute;
+    bottom: 60px;
+    left: 1px;
+    display: flex;
+    gap: 10px;
+    background: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+    flex-direction: column;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px); /* Trượt xuống nhẹ */
+    transition: opacity 1s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
+}
+
+.select-music {
+    position: absolute;
+    bottom: 60px;
+    left: 55px;
+    display: flex;
+    gap: 10px;
+    background: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+    flex-direction: column;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px); /* Trượt xuống nhẹ */
+    transition: opacity 1s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
+}
+
+/* Hiển thị khi active */
+.select-background.active{ 
+    display: flex;
+    bottom: 60px;
+    left: 1px;
+    visibility: visible;
+    transform: translateY(0); /* Trở về vị trí ban đầu */
+    opacity: 1;
+}
+
+.select-music.active {
+    display: flex;
+    bottom: 60px;
+    left: 55px;
+    visibility: visible;
+    transform: translateY(0); /* Trở về vị trí ban đầu */
+    opacity: 1;
+}
+
+.select-effect {
+    position: absolute;
+    bottom: 60px;
+    left: 110px;
+    display: flex;
+    gap: 10px;
+    background: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+    flex-direction: column;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px); /* Trượt xuống nhẹ */
+    transition: opacity 1s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
+}
+
+.select-effect.active {
+    display: flex;
+    bottom: 60px;
+    left: 110px;
+    visibility: visible;
+    transform: translateY(0); /* Trở về vị trí ban đầu */
+    opacity: 1;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* 🟡 Khi click vào icon, nó sẽ rung */
+.icon:active {
+    animation: shake 0.3s ease-in-out;
+}
+
+
+/* Icon cảm xúc */
+.emotion img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.emotion img:hover {
+    animation: shake 1s ease-in-out;
+}
+
+/* Ẩn mặc định */
+.hidden {
+    display: none;
+}
+
+#music-display {
+    position: fixed;
+    bottom: 50px;
+    right: 10px;
+    background: rgba(0, 0, 50, 0.8);
+    color: white;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    background-color: transparent;
+}
+
+.static-text {
+    width: 100%;
+    text-align: center;
+    opacity: 0.8;
+    font-size: 10px;
+    font-family: 'PixelFont', cursive;
+}
+
+#emotion-display {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 50, 0.8);
+    color: white;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    background-color: transparent;
+}
+
+
+#current-track {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 5px;
+    font-family: 'PixelFont', cursive;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.fade-out {
+    animation: fadeOut 1s forwards;
+}
+
+.fade-in {
+    animation: fadeIn 1s forwards;
+}
+
+
+
+
+
+#music-control {
+    position: absolute;
+    top: 25%;
+    left: 50%;  /* Đưa điểm gốc của phần tử vào giữa */
+    transform: translateX(-50%); /* Dịch ngược lại 50% chiều rộng để căn giữa */
+    display: flex;
+    gap: 15px;
+    background: transparent;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+#music-control button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#music-control button img {
+    width: 20px; 
+    height: 20px;
+    object-fit: contain;
+    margin: 0;
+    display: flex;
+}
+
+#music-control button:hover {
+    transform: scale(1.2);
+}
+
+#title-song {
+    position: absolute;
+    font-size: 9px;
+    top: 22%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+    font-family: 'PixelFont', cursive;
+    color: white;
+    background:transparent;
+    padding: 10px 20px;
+    text-transform: uppercase;
+}
+
+#rain-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 120%; /* Làm lớn hơn một chút để tránh khoảng trống */
+    height: 120%;
+    background: url('assets/gifs/rain.gif') repeat center center; 
+    background-size: contain ; /* Giữ tỉ lệ, tránh méo */
+    opacity: 0.6; /* Làm nhẹ hiệu ứng */
+    z-index: -1; /* Đưa background xuống dưới tất cả nội dung */
+    animation: slowRain 10s linear infinite;
+    animation: fadeInBackground 3s ease-in-out; /* Chạy chậm hơn */
+}
+
+@keyframes slowRain {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: 0% 100%;
+    }
+}
+
+/* Hiệu ứng mờ dần khi hiển thị */
+@keyframes fadeInBackground {
+    from {
+        opacity: 0;
+        transform: scale(1.2); /* Hiệu ứng phóng to nhỏ */
+    }
+    to {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+}
+
+#snow-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 120%; /* Làm lớn hơn một chút để tránh khoảng trống */
+    height: 120%;
+    background: url('assets/gifs/snow.gif') repeat center center; 
+    background-size: contain ; /* Giữ tỉ lệ, tránh méo */
+    opacity: 0.6; /* Làm nhẹ hiệu ứng */
+    z-index: -1; /* Đưa background xuống dưới tất cả nội dung */
+    animation: slowRain 10s linear infinite;
+    animation: fadeInBackground 3s ease-in-out; /* Chạy chậm hơn */
+}
+
+#wind-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full màn hình */
+    height: 100vh; /* Full màn hình */
+    background: url('assets/gifs/wind.gif') repeat center center;
+    background-size: contain; /* Giữ kích thước gốc của GIF */
+    opacity: 0.6; /* Làm nhẹ hiệu ứng */
+    z-index: -1; /* Đưa xuống dưới nội dung */
+
+    animation: fadeInBackground 3s ease-in-out; /* Hiệu ứng mượt hơn */
+}
+
+
+#storm-effect {
+    position: fixed;
+    width: 50vw; /* Kích thước nhỏ hơn */
+    height: 50vh;
+    opacity: 2; /* Rõ hơn */
+    background: url('assets/gifs/storm.gif') no-repeat center center;
+    background-size: cover;
+    z-index: 1000;
+
+    /* Ẩn mặc định */
+    display: none;
+}
+
+/* Animation từ góc trên xuống */
+@keyframes stormFall {
+    from {
+        top: -40vh; /* Bắt đầu từ ngoài màn hình */
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        top: 70vh; /* Rơi xuống giữa màn hình */
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#rain-effect-1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 120%; /* Làm lớn hơn một chút để tránh khoảng trống */
+    height: 120%;
+    background: url('assets/gifs/rain.gif') repeat center center; 
+    background-size: contain ; /* Giữ tỉ lệ, tránh méo */
+    opacity: 0.3; /* Làm nhẹ hiệu ứng */
+    z-index: -1; /* Đưa background xuống dưới tất cả nội dung */
+    animation: slowRain 10s linear infinite;
+    animation: fadeInBackground 3s ease-in-out; /* Chạy chậm hơn */
+}
+
 
 
 

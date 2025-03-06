@@ -7,18 +7,118 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="chat-container" class="hidden">
-        <input type="text" id="chat-input" placeholder="Tâm trạng của bạn hôm nay như thế nào?">
-        <button id="bg-change-btn" class="chat-button">
-            <img src="assets/icons/bg_icon.jpg" alt="Đổi nền">
-        </button>
-        <button id="music-change-btn" class="chat-button">
-            <img src="assets/icons/music_icon.jpg" alt="Đổi nhạc">
-        </button>
-        <div id="pixel-effect"></div>
-        <div id="PixelFont"></div>
+    <div id="title">Echo Bench</div>
+    <div id="background-overlay"></div>
+    <div id="chat-container">
+        <input type="text" id="chat-input" spellcheck="false" placeholder="Ngày hôm nay của bạn như nào?">
+        <p class="subtext">- Nhấn để trả lời -</p>
     </div>
 
-    <script src="script.js"></script>
+    <div id="button-container">
+        <!-- Nút chọn Nền -->
+        <div class="button" onclick="toggleSelection('background')">
+            <div class="tooltip">Nền</div>
+            <img src="assets/icons/IU/bg-icon.jpg" alt="Nền">
+        </div>
+        <!-- Menu chọn nền -->
+        <div class="select-background hidden">
+            <div class="emotion" data-type="background" data-value="happy">
+                <img src="assets/icons/emotions/happy.jpg" alt="Vui">
+            </div>
+            <div class="emotion" data-type="background" data-value="sad">
+                <img src="assets/icons/emotions/sad.jpg" alt="Buồn">
+            </div>
+            <div class="emotion" data-type="background" data-value="worried">
+                <img src="assets/icons/emotions/worry.jpg" alt="Lo lắng">
+            </div>
+            <div class="emotion" data-type="background" data-value="neutral">
+                <img src="assets/icons/emotions/neutral.jpg" alt="Bình thường">
+            </div>
+            <div class="emotion" data-type="background" data-value="love">
+                <img src="assets/icons/emotions/in-love.jpg" alt="Tình yêu">
+            </div>
+            <div class="emotion" data-type="background" data-value="angry">
+                <img src="assets/icons/emotions/angry.jpg" alt="Tức giận">
+            </div>
+        </div>
+
+        <!-- Nút chọn Nhạc -->
+        <div class="button" onclick="toggleSelection('music')">
+            <div class="tooltip">Nhạc</div>
+            <img src="assets/icons/IU/music-icon.jpg" alt="Nhạc">
+        </div>
+        <!-- Menu chọn nhạc -->
+        <div class="select-music hidden">
+            <div class="emotion" data-type="music" data-value="happy">
+                <img src="assets/icons/emotions/happy.jpg" alt="Vui">
+            </div>
+            <div class="emotion" data-type="music" data-value="sad">
+                <img src="assets/icons/emotions/sad.jpg" alt="Buồn">
+            </div>
+            <div class="emotion" data-type="music" data-value="worried">
+                <img src="assets/icons/emotions/worry.jpg" alt="Lo lắng">
+            </div>
+            <div class="emotion" data-type="music" data-value="neutral">
+                <img src="assets/icons/emotions/neutral.jpg" alt="Bình thường">
+            </div>
+            <div class="emotion" data-type="music" data-value="love">
+                <img src="assets/icons/emotions/in-love.jpg" alt="Tình yêu">
+            </div>
+            <div class="emotion" data-type="music" data-value="angry">
+                <img src="assets/icons/emotions/angry.jpg" alt="Tức giận">
+            </div>
+        </div>
+
+        <!-- Nút chọn Môi trường -->
+        <div class="button" onclick="toggleSelection('effect')">
+            <div class="tooltip">Môi trường</div>
+            <img src="assets/icons/IU/effect-icon.jpg" alt="Môi trường">
+        </div>
+        
+        <!-- Menu chọn môi trường -->
+        <div class="select-effect hidden">
+            <div class="emotion" data-type="environment" data-value="rain">
+                <img src="assets/icons/IU/rain.jpg" alt="Mưa">
+            </div>
+            <div class="emotion" data-type="environment" data-value="storm">
+                <img src="assets/icons/IU/rain_thunder.jpg" alt="Bão">
+            </div>
+            <div class="emotion" data-type="environment" data-value="wind">
+                <img src="assets/icons/IU/wind.jpg" alt="Gió">
+            </div>
+            <div class="emotion" data-type="environment" data-value="snow">
+                <img src="assets/icons/IU/snow.jpg" alt="Tuyết">
+            </div>
+        </div>
+    </div>
+
+    <div id="music-display">
+        <span class="static-text">predict:</span>
+    </div>
+
+    <div id="emotion-display">
+        <span id="current-track">neutral</span>
+    </div>
+
+    <div id="music-control">
+        <button id="prev">
+            <img src="assets/icons/IU/backward-icon.jpg" alt="Previous">
+        </button>
+        <button id="play-pause">
+            <img src="assets/icons/IU/pause-icon.jpg" alt="Play/Pause">
+        </button>
+        <button id="next">
+            <img src="assets/icons/IU/forward-icon.jpg" alt="Next">
+        </button>
+    </div>
+
+    <div id = "title-song">
+        <span id="song-name">Song name</span>
+    </div>
+
+    
+    <script type="module" src="script.js"></script>
+
+    
 </body>
 </html>
