@@ -55,7 +55,7 @@ body {
     background-repeat: no-repeat;
     z-index: -1; /* Đưa background xuống dưới tất cả nội dung */
     
-    animation: fadeInBackground 1.5s ease-in-out;
+    animation: fadeInBackground 1s ease-in-out;
 }
 
 
@@ -63,9 +63,8 @@ body {
 
 #title {
     position: absolute;
-    transform: translate(-50%, -50%);
-    top: 5%;
-    left: 38.7%; 
+    margin: 0;
+    top: -20%;
     font-family: 'PixelFont', cursive;
     font-size: 30px;
     color: white;
@@ -89,7 +88,7 @@ body {
 #chat-container {
     position: absolute;
     bottom: 2px; 
-    left: 50%;  /* Đưa điểm gốc của phần tử vào giữa */
+    left: 48.4%;  /* Đưa điểm gốc của phần tử vào giữa */
     transform: translateX(-50%); /* Dịch ngược lại 50% chiều rộng để căn giữa */
     background: #1e293b;
     padding: 15px;
@@ -100,8 +99,37 @@ body {
     background-color: transparent;
 }
 
-/* Ô nhập chat */
+#loading{
+    position: fixed; /* Giữ vị trí trên cùng */
+    top: 39%;  /* Căn giữa theo chiều dọc */
+    left: 57%; /* Căn giữa theo chiều ngang */
+    transform: translate(-50%, -50%); /* Điều chỉnh để căn giữa */
+    width: 50%; /* Điều chỉnh kích thước */
+    padding: 10px;
+    background: #1e293b;
+    color: white;
+    font-family: 'PixelFont', cursive;
+    font-size: 20px;
+    text-align: center;
+    outline: none;
+    background-color: transparent;
+    border: transparent;
+    visibility: hidden;
+    animation: blink 1s infinite;
+    z-index: 1000; /* Đảm bảo nó nằm trên input */
+}
+
+/* Khi loading active, nó sẽ hiển thị */
+#loading.active {
+    position: fixed;
+    top: -15%;  /* Ví dụ: Xuất hiện gần đầu trang */
+    left: 57%;
+    visibility: visible;
+}
+
+/* Chat Input */
 #chat-input {
+    position: relative; /* Để giữ nó dưới loading */
     width: 110%;
     padding: 10px;
     background: #1e293b;
@@ -112,6 +140,7 @@ body {
     outline: none;
     background-color: transparent;
     border: transparent;
+    visibility: visible;
 }
 
 #chat-input::placeholder {
@@ -125,20 +154,32 @@ body {
 }
 
 /* Chữ nhỏ bên dưới ô nhập */
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
 .subtext {
     font-size: 10px;
-    opacity: 0.8;
+    opacity: 0.9;
     margin-top: 1px;
     margin-left: 50px;
+    
 }
+
+#chat-input.hidden{
+    visibility: hidden;
+}
+
 
 /* Container chứa các nút */
 #button-container {
-    bottom: 30px;
+    bottom: 20px;
     left: 20px;
     display: flex;
     justify-content: center;
-    gap: 3px;
+    gap: 1px;
     position: fixed;
 }
 
@@ -371,9 +412,8 @@ body {
 
 #music-control {
     position: absolute;
-    top: 25%;
-    left: 50%;  /* Đưa điểm gốc của phần tử vào giữa */
-    transform: translateX(-50%); /* Dịch ngược lại 50% chiều rộng để căn giữa */
+    top: 50%;
+    margin: 0;
     display: flex;
     gap: 15px;
     background: transparent;
@@ -403,10 +443,8 @@ body {
 #title-song {
     position: absolute;
     font-size: 9px;
-    top: 22%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
+    top: 27%;
+    margin: 0;
     font-family: 'PixelFont', cursive;
     color: white;
     background:transparent;
@@ -421,7 +459,7 @@ body {
     width: 120%; /* Làm lớn hơn một chút để tránh khoảng trống */
     height: 120%;
     background: url('assets/gifs/rain.gif') repeat center center; 
-    background-size: contain ; /* Giữ tỉ lệ, tránh méo */
+    background-size: auto ; /* Giữ tỉ lệ, tránh méo */
     opacity: 0.6; /* Làm nhẹ hiệu ứng */
     z-index: -1; /* Đưa background xuống dưới tất cả nội dung */
     animation: slowRain 10s linear infinite;
@@ -456,7 +494,7 @@ body {
     width: 120%; /* Làm lớn hơn một chút để tránh khoảng trống */
     height: 120%;
     background: url('assets/gifs/snow.gif') repeat center center; 
-    background-size: contain ; /* Giữ tỉ lệ, tránh méo */
+    background-size: auto ; /* Giữ tỉ lệ, tránh méo */
     opacity: 0.6; /* Làm nhẹ hiệu ứng */
     z-index: -1; /* Đưa background xuống dưới tất cả nội dung */
     animation: slowRain 10s linear infinite;
@@ -470,7 +508,7 @@ body {
     width: 100vw; /* Full màn hình */
     height: 100vh; /* Full màn hình */
     background: url('assets/gifs/wind.gif') repeat center center;
-    background-size: contain; /* Giữ kích thước gốc của GIF */
+    background-size: auto; /* Giữ kích thước gốc của GIF */
     opacity: 0.6; /* Làm nhẹ hiệu ứng */
     z-index: -1; /* Đưa xuống dưới nội dung */
 
@@ -484,7 +522,7 @@ body {
     height: 50vh;
     opacity: 2; /* Rõ hơn */
     background: url('assets/gifs/storm.gif') no-repeat center center;
-    background-size: cover;
+    background-size: auto;
     z-index: 1000;
 
     /* Ẩn mặc định */
@@ -512,12 +550,28 @@ body {
     width: 120%; /* Làm lớn hơn một chút để tránh khoảng trống */
     height: 120%;
     background: url('assets/gifs/rain.gif') repeat center center; 
-    background-size: contain ; /* Giữ tỉ lệ, tránh méo */
+    background-size: auto ; /* Giữ tỉ lệ, tránh méo */
     opacity: 0.3; /* Làm nhẹ hiệu ứng */
     z-index: -1; /* Đưa background xuống dưới tất cả nội dung */
     animation: slowRain 10s linear infinite;
     animation: fadeInBackground 3s ease-in-out; /* Chạy chậm hơn */
 }
+
+#display-container {
+    position: absolute;
+    top:10%;
+    width: 300px;
+    height: 150px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    margin: 0 auto; /* Căn giữa theo chiều ngang */
+}
+
+
 
 
 

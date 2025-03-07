@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="title">Echo Bench</div>
+    
     <div id="background-overlay"></div>
     <div id="chat-container">
         <input type="text" id="chat-input" spellcheck="false" placeholder="Ngày hôm nay của bạn như nào?">
         <p class="subtext">- Nhấn để trả lời -</p>
+        <div id="loading">LOADING...</div>
+
     </div>
 
     <div id="button-container">
@@ -91,7 +93,6 @@
             </div>
         </div>
     </div>
-
     <div id="music-display">
         <span class="static-text">predict:</span>
     </div>
@@ -99,6 +100,13 @@
     <div id="emotion-display">
         <span id="current-track">neutral</span>
     </div>
+
+
+    <div id="display-container">
+        <div id = "title-song">
+            <span id="song-name">Song name</span>
+        </div>
+    <div id="title">Echo Bench</div>
 
     <div id="music-control">
         <button id="prev">
@@ -111,9 +119,6 @@
             <img src="assets/icons/IU/forward-icon.jpg" alt="Next">
         </button>
     </div>
-
-    <div id = "title-song">
-        <span id="song-name">Song name</span>
     </div>
 
     

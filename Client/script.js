@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const audio = new Audio(songs.happy[0].file);
     window.toggleSelection = toggleSelection;
     window.togglePopup = togglePopup;
-    
+    const effect = ['rain', 'storm', 'wind', 'snow', " "];
+    let currentEffect = '';
 
 
     chatInput.addEventListener("keypress", async function (event) { // 🟢 THÊM async
@@ -15,7 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
             let message = chatInput.value.trim(); // Lấy nội dung chat
             
             if (message === "") return; // Không gửi nếu rỗng
-            
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('chat-input').classList.add('hidden');
             console.debug("Bạn đã nhập:", message);
             
             try {
@@ -29,17 +31,107 @@ document.addEventListener("DOMContentLoaded", function () {
     
                 let data = await response.json();
                 console.log("Phản hồi từ API:", data);
-                
-                // Xử lý hiển thị phản hồi API nếu cần
                 currentEmotion = data.result.toLowerCase();
+                console.log(currentEmotion)
+                const possibilitiesObj = data.possibilities[0];  // Lấy object trong mảng
+                console.log("Possibilities Object:", possibilitiesObj);
+
+                const max_value = possibilitiesObj[data.result]; // Truy xuất đúng key
+                console.log("Max value:", max_value);
+
+                // Xử lý hiển thị phản hồi API nếu cần
+                
                 updateEmotion();
                 changeBackground(currentEmotion);
                 changeMusic(currentEmotion);
+
+
+                if(max_value > 0.5){
+                    if (currentEmotion === 'happy'){
+                        console.log(currentEffect);
+                        stopEffect(currentEffect);
+
+                        const numbers = [2, 3, 4];
+                        const randomIndex = Math.floor(Math.random() * numbers.length); // Chỉ gọi một lần
+                        const newEffect = effect[numbers[randomIndex]]; // Lưu kết quả vào biến
+
+                        startEffect(newEffect);
+                        console.log(newEffect);
+
+                        currentEffect = newEffect; // Cập nhật currentEffect
+                    }
+                    else if (currentEmotion === 'sad'){
+                        console.log(currentEffect);
+                        stopEffect(currentEffect);
+
+                        const numbers = [0, 1, 3, 4];
+                        const randomIndex = Math.floor(Math.random() * numbers.length); // Chỉ gọi một lần
+                        const newEffect = effect[numbers[randomIndex]]; // Lưu kết quả vào biến
+
+                        startEffect(newEffect);
+                        console.log(newEffect);
+
+                        currentEffect = newEffect; // Cập nhật currentEffect
+                }
+                    else if (currentEmotion === 'neutral'){
+                        console.log(currentEffect);
+                        stopEffect(currentEffect);
+
+                        const numbers = [2, 3, 4];
+                        const randomIndex = Math.floor(Math.random() * numbers.length); // Chỉ gọi một lần
+                        const newEffect = effect[numbers[randomIndex]]; // Lưu kết quả vào biến
+
+                        startEffect(newEffect);
+                        console.log(newEffect);
+
+                        currentEffect = newEffect; // Cập nhật currentEffect
+                }
+                    else if (currentEmotion === 'worry'){
+                        console.log(currentEffect);
+                        stopEffect(currentEffect);
+
+                        const numbers = [2, 4];
+                        const randomIndex = Math.floor(Math.random() * numbers.length); // Chỉ gọi một lần
+                        const newEffect = effect[numbers[randomIndex]]; // Lưu kết quả vào biến
+
+                        startEffect(newEffect);
+                        console.log(newEffect);
+
+                        currentEffect = newEffect; // Cập nhật currentEffect
+                }
+                    else if (currentEmotion === 'inlove'){
+                        console.log(currentEffect);
+                        stopEffect(currentEffect);
+
+                        const numbers = [3, 4];
+                        const randomIndex = Math.floor(Math.random() * numbers.length); // Chỉ gọi một lần
+                        const newEffect = effect[numbers[randomIndex]]; // Lưu kết quả vào biến
+
+                        startEffect(newEffect);
+                        console.log(newEffect);
+
+                        currentEffect = newEffect; // Cập nhật currentEffect
+                }
+                    else if (currentEmotion === 'angry'){
+                        console.log(currentEffect);
+                        stopEffect(currentEffect);
+
+                        const numbers = [0, 4];
+                        const randomIndex = Math.floor(Math.random() * numbers.length); // Chỉ gọi một lần
+                        const newEffect = effect[numbers[randomIndex]]; // Lưu kết quả vào biến
+
+                        startEffect(newEffect);
+                        console.log(newEffect);
+
+                        currentEffect = newEffect; // Cập nhật currentEffect
+                }
+                }
     
             } catch (error) {
                 console.error("Lỗi khi gọi API:", error);
             }
-    
+            document.getElementById('loading').classList.remove('active');
+            document.getElementById('chat-input').classList.remove('hidden');
             chatInput.value = ""; // Xóa nội dung sau khi gửi
         }
     });
@@ -151,7 +243,7 @@ function changeBackground(emotion) {
         img.onload = function () {
             // Cập nhật ảnh nền
             bgOverlay.style.backgroundImage = `url(${randomBg})`;
-            bgOverlay.style.animation = "fadeInBackground 1.5s ease-in-out";
+            bgOverlay.style.animation = "fadeInBackground 1s ease-in-out";
             console.log(`🎨 Đang hiển thị background theo cảm xúc: ${emotion}`);
 
             // Đo sáng và điều chỉnh độ sáng
@@ -160,7 +252,9 @@ function changeBackground(emotion) {
 
         lastBg = randomBg;
         currentEmotion = emotion;
-    }, 500); // Chờ fade-out hoàn tất trước khi đổi ảnh
+    }, 300); // Chờ fade-out hoàn tất trước khi đổi ảnh
+    isPlaying= true;
+    updatePlayPauseIcon()
 }
 
 function adjustBrightness(img, bgOverlay) {
@@ -243,6 +337,8 @@ function changeMusic(emotion) {
 
     console.log(`🎵 Đang phát nhạc theo cảm xúc: ${emotion}`);
     updateSong();
+    isPlaying = true;
+    updatePlayPauseIcon();
 }
 
 
@@ -335,8 +431,7 @@ audio.addEventListener("ended", () => {
 
 document.addEventListener("DOMContentLoaded", function () {
     const effectButtons = document.querySelectorAll(".select-effect .emotion");
-    let currentEffect = null; // Lưu hiệu ứng đang chạy
-    let lightningInterval = null;
+    let currentEffect = null;
 
     // Danh sách âm thanh
     const soundEffects = {
@@ -395,31 +490,38 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function startEffect(value) {
+    window.startEffect = function (value) {
         switch (value) {
             case "rain":
                 startRainEffect();
                 soundEffects.rain.play();
+                currentEffect='rain';
+                console.log('mưa ròi')
                 break;
             case "storm":
                 startStormEffect();
                 soundEffects.rainofstorm.play();
                 soundEffects.windofstorm.play();
+                currentEffect='storm';
                 break;
             case "wind":
                 startWindEffect();
                 soundEffects.wind.play();
+                currentEffect='wind';
                 break;
             case "snow":
                 startSnowEffect();
                 soundEffects.snow.play();
+                currentEffect='snow';
                 break;
+            case " ":
+                stopEffect();
             default:
                 console.warn("⚠ Không có hiệu ứng phù hợp:", value);
         }
     }
 
-    function stopEffect(value) {
+    window.stopEffect=function (value) {
         switch (value) {
             case "rain":
                 stopRainEffect();
@@ -451,6 +553,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 soundEffects.snow.currentTime = 0;
                 }
                 break;
+            case '':
+                stopEffect();
         }
     }
 
