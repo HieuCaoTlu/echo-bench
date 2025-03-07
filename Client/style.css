@@ -37,11 +37,9 @@ body {
 
 @keyframes fadeOutBackground {
     from {
-        opacity: 1;
         transform: scale(1);
     }
     to {
-        opacity: 0.95;
         transform: scale(1.05); /* Thu nhỏ nhẹ khi biến mất */
     }
 }
