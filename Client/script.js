@@ -189,6 +189,7 @@ document.querySelectorAll(".emotion").forEach(emotion => {
     emotion.addEventListener("click", function () {
         let type = this.dataset.type;
         let value = this.dataset.value;
+        console.log(value)
 
         if (type === "background") {
             changeBackground(value);

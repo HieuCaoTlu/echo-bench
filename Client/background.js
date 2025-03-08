@@ -87,19 +87,19 @@ export const backgrounds = {
     ],
     inlove: [
         {
-            "file": "assets/backgrounds/inlove/1.gif"
+            "file": "assets/backgrounds/in-love/1.gif"
         },
         {
-            "file": "assets/backgrounds/inlove/2.gif"
+            "file": "assets/backgrounds/in-love/2.gif"
         },
         {
-            "file": "assets/backgrounds/inlove/3.gif"
+            "file": "assets/backgrounds/in-love/3.gif"
         },
         {
-            "file": "assets/backgrounds/inlove/4.gif"
+            "file": "assets/backgrounds/in-love/4.gif"
         },
         {
-            "file": "assets/backgrounds/inlove/5.gif"
+            "file": "assets/backgrounds/in-love/5.gif"
         },
     ],
     
