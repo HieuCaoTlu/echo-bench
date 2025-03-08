@@ -1,23 +1,106 @@
 export const backgrounds = {
     happy: [
         {
-            "title": "Happy Background",
-            "file": "assets/backgrounds/happy/bg1.jpg"
+            "file": "assets/backgrounds/happy/1.gif"
         },
         {
-            "title": "Happy Background",
-            "file": "assets/backgrounds/happy/bg2.jpg"
-        }
+            "file": "assets/backgrounds/happy/2.gif"
+        },
+        {
+            "file": "assets/backgrounds/happy/3.gif"
+        },
+        {
+            "file": "assets/backgrounds/happy/4.gif"
+        },
+        {
+            "file": "assets/backgrounds/happy/5.gif"
+        },
     ],
 
     sad: [
         {
-            "title": "Sad Background",
-            "file": "assets/backgrounds/sad/bg1.jpg"
+            "file": "assets/backgrounds/sad/1.gif"
         },
-        { 
-            "title": "Sad Background",
-            "file": "assets/backgrounds/sad/bg2.jpg"
-        }
-    ]
+        {
+            "file": "assets/backgrounds/sad/2.gif"
+        },
+        {
+            "file": "assets/backgrounds/sad/3.gif"
+        },
+        {
+            "file": "assets/backgrounds/sad/4.gif"
+        },
+        {
+            "file": "assets/backgrounds/sad/5.gif"
+        },
+    ],
+    neutral: [
+        {
+            "file": "assets/backgrounds/neutral/1.gif"
+        },
+        {
+            "file": "assets/backgrounds/neutral/2.gif"
+        },
+        {
+            "file": "assets/backgrounds/neutral/3.gif"
+        },
+        {
+            "file": "assets/backgrounds/neutral/4.gif"
+        },
+        {
+            "file": "assets/backgrounds/neutral/5.gif"
+        },
+    ],
+    worry: [
+        {
+            "file": "assets/backgrounds/worry/1.gif"
+        },
+        {
+            "file": "assets/backgrounds/worry/2.gif"
+        },
+        {
+            "file": "assets/backgrounds/worry/3.gif"
+        },
+        {
+            "file": "assets/backgrounds/worry/4.gif"
+        },
+        {
+            "file": "assets/backgrounds/worry/5.gif"
+        },
+    ],
+    angry: [
+        {
+            "file": "assets/backgrounds/angry/1.gif"
+        },
+        {
+            "file": "assets/backgrounds/angry/2.gif"
+        },
+        {
+            "file": "assets/backgrounds/angry/3.gif"
+        },
+        {
+            "file": "assets/backgrounds/angry/4.gif"
+        },
+        {
+            "file": "assets/backgrounds/angry/5.gif"
+        },
+    ],
+    inlove: [
+        {
+            "file": "assets/backgrounds/inlove/1.gif"
+        },
+        {
+            "file": "assets/backgrounds/inlove/2.gif"
+        },
+        {
+            "file": "assets/backgrounds/inlove/3.gif"
+        },
+        {
+            "file": "assets/backgrounds/inlove/4.gif"
+        },
+        {
+            "file": "assets/backgrounds/inlove/5.gif"
+        },
+    ],
+    
 };

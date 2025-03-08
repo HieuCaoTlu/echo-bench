@@ -140,21 +140,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function setDefaultBackground() {
-    let bgOverlay = document.getElementById("background-overlay");
-    let img = new Image();
-    img.src = "assets/backgrounds/happy/bg1.jpg"; 
-    img.crossOrigin = "Anonymous"; // Nếu cần tránh lỗi CORS
-
-    img.onload = function () {
-        bgOverlay.style.backgroundImage = `url(${img.src})`;
-        adjustBrightness(img, bgOverlay); // Gọi sau khi ảnh đã tải xong
+    changeBackground('neutral')
     };
-}
 
 
 function setDefaultSong() { 
-    audio.play();
+    changeMusic('neutral')
     updateSong();
+    isPlaying = true;
 }
 
 
@@ -208,7 +201,7 @@ document.querySelectorAll(".emotion").forEach(emotion => {
 });
 
 // 🎵 Cập nhật bài hát theo cảm xúc
-let currentEmotion = "happy"; // Mặc định là "happy"
+let currentEmotion = "neutral"; // Mặc định là "happy"
 let trackList = songs[currentEmotion].map(track => track.file);
 let currentTrackIndex = 0;
 const audio = new Audio(trackList[currentTrackIndex]);
@@ -285,7 +278,7 @@ function adjustBrightness(img, bgOverlay) {
     } else if (brightness > 180) {
         bgOverlay.style.filter = "brightness(60%)"; // Trung bình sáng → Giảm nhẹ
     } else {
-        bgOverlay.style.filter = "brightness(80%)"; // Ảnh tối rồi → Giữ nguyên
+        bgOverlay.style.filter = "brightness(50%)"; // Ảnh tối rồi → Giữ nguyên
     }
 }
 
@@ -296,6 +289,7 @@ function adjustBrightness(img, bgOverlay) {
 
 // 🎵 Đổi nhạc (tránh trùng bài cũ)
 function changeMusic(emotion) {
+    audio.pause();
     if (!songs[emotion] || songs[emotion].length === 0) {
         console.log("⚠ Không có nhạc cho cảm xúc này!");
         return;
