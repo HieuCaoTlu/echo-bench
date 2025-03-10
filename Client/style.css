@@ -20,17 +20,14 @@ body {
     transition: opacity 1s ease-in-out;
     filter: brightness(100%);
     position: relative;
-    background: none; /* Xóa nền của body */
 }
 
 
 @keyframes fadeInBackground {
     from {
-        opacity: 0.95;
         transform: scale(1.1); /* Phóng to nhẹ */
     }
     to {
-        opacity: 1;
         transform: scale(1);
     }
 }
