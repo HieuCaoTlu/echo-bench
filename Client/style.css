@@ -22,6 +22,9 @@ body {
     position: relative;
 }
 
+*{
+    color: white;
+}
 
 @keyframes fadeInBackground {
     from {
@@ -31,6 +34,8 @@ body {
         transform: scale(1);
     }
 }
+
+
 
 @keyframes fadeOutBackground {
     from {
@@ -69,10 +74,11 @@ body {
     padding: 10px 20px;
     text-align: center;
     text-transform: uppercase;
-
     opacity: 0; /* Ẩn ban đầu để tránh hiển thị sai vị trí */
     animation: fadeIn 1.5s ease-in-out forwards;
 }
+
+
 
 /* Hiệu ứng mờ dần */
 @keyframes fadeIn {

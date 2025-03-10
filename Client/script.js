@@ -125,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         currentEffect = newEffect; // Cập nhật currentEffect
                 }
+                
                 }
     
             } catch (error) {
@@ -132,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             document.getElementById('loading').classList.remove('active');
             document.getElementById('chat-input').classList.remove('hidden');
-            chatInput.value = ""; // Xóa nội dung sau khi gửi
+            chatInput.value = ""
         }
     });
     
@@ -241,7 +242,7 @@ function changeBackground(emotion) {
             console.log(`🎨 Đang hiển thị background theo cảm xúc: ${emotion}`);
 
             // Đo sáng và điều chỉnh độ sáng
-            adjustBrightness(img, bgOverlay);
+            adjustBrightness();
         };
 
         lastBg = randomBg;
@@ -251,40 +252,22 @@ function changeBackground(emotion) {
     updatePlayPauseIcon()
 }
 
-function adjustBrightness(img, bgOverlay) {
-    let canvas = document.createElement("canvas");
-    let ctx = canvas.getContext("2d");
-
-    canvas.width = img.width;
-    canvas.height = img.height;
-    ctx.drawImage(img, 0, 0, img.width, img.height);
-
-    let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    let pixels = imageData.data;
-    let brightness = 0;
-    let totalPixels = pixels.length / 4; // Mỗi pixel có 4 giá trị (R, G, B, A)
-
-    for (let i = 0; i < pixels.length; i += 4) {
-        let r = pixels[i];
-        let g = pixels[i + 1];
-        let b = pixels[i + 2];
-        brightness += (r * 0.299 + g * 0.587 + b * 0.114);
+function adjustBrightness() {
+    let bgColor = backgrounds[currentEmotion].find(bg => bg.file === lastBg)?.color || "";
+    const title = document.getElementById('title')
+    const titleSong = document.getElementById('title-song')
+    if (bgColor === "black"){
+         title.style.color = 'rgba(0, 0, 0, 0.4)';
+         titleSong.style.color = 'rgba(0, 0, 0, 0.4)';
     }
-    brightness = brightness / totalPixels;
-
-    console.log("Độ sáng ảnh:", brightness);
-
-    if (brightness > 200) {
-        bgOverlay.style.filter = "brightness(40%)"; // Rất sáng → Giảm mạnh
-    } else if (brightness > 180) {
-        bgOverlay.style.filter = "brightness(60%)"; // Trung bình sáng → Giảm nhẹ
-    } else {
-        bgOverlay.style.filter = "brightness(50%)"; // Ảnh tối rồi → Giữ nguyên
+    else {
+        title.style.color = 'white';
+        titleSong.style.color = 'white';
     }
+    console.log(title)
+
+
 }
-
-
-
 
 
 
