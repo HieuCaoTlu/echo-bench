@@ -28,8 +28,8 @@ export const songs = {
         file: "assets/audio/happy/1.mp3",
       },
       {
-        title: "A Song Without a title Yet",
-        artist: "A Girl in Grade 5",
+        title: "Rather Be Instrumental",
+        artist: "Clean Bandit",
         file: "assets/audio/happy/2.mp3",
       },
       {

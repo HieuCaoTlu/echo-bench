@@ -140,18 +140,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+function startApp(event) {
+        const welcomeScreen = document.getElementById("welcome-screen");
+        welcomeScreen.classList.add("hidden");
+
+        setTimeout(() => {
+            
+            welcomeScreen.style.display = "none";
+
+            changeMusic('neutral');
+        }, 500);
+    }
+
+document.addEventListener("click", startApp, { once: true });
+
+
 function setDefaultBackground() {
     changeBackground('neutral')
     };
-
-
-function setDefaultSong() { 
-    changeMusic('neutral')
-    updateSong();
-    isPlaying = true;
-}
-
-
 
 
 function togglePopup(button) {
@@ -305,7 +311,7 @@ function changeMusic(emotion) {
                 } else {
                     clearInterval(fadeInInterval); // Dừng fade-in khi đạt mức tối đa
                 }
-            }, 100);
+            }, 200);
         }
     }, 100);
 
@@ -428,7 +434,7 @@ document.addEventListener("DOMContentLoaded", function () {
     soundEffects.windofstorm.loop = true;
     soundEffects.rain.volume = 0.2;
     soundEffects.rainofstorm.volume = 0.8;
-    soundEffects.wind.volume = 1;
+    soundEffects.wind.volume = 0.4;
     soundEffects.snow.volume = 0.2;
     soundEffects.lightning.volume = 0.2;
     soundEffects.windofstorm.volume = 0.3;
@@ -586,7 +592,7 @@ function startStormEffect() {
         if (!stormActive) return; // Nếu đã bị tắt, dừng ngay lập tức
 
         // Đặt vị trí ngẫu nhiên trên màn hình
-        let randomX = Math.random() * 60; // Trong khoảng 0 - 60% ngang
+        let randomX = 0; // Trong khoảng 0 - 60% ngang
         let randomY = 0; // Trong khoảng 0 - 60% dọc
         storm.style.left = `${randomX}vw`;
         storm.style.top = `${randomY}vh`;
@@ -705,5 +711,4 @@ function updatePlayPauseIcon() {
 
 
 setDefaultBackground();
-setDefaultSong();
 

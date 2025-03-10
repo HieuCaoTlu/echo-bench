@@ -3,6 +3,8 @@
     src: url('./assets/fonts/pixel-font.woff') format('woff');
 }
 
+
+
 body {
     font-family: 'PixelFont', cursive;
     background: linear-gradient(to bottom, #0f172a, #1e293b);
@@ -91,7 +93,7 @@ body {
 #chat-container {
     position: absolute;
     bottom: 2px; 
-    left: 48.4%;  /* Đưa điểm gốc của phần tử vào giữa */
+    left: 48%;  /* Đưa điểm gốc của phần tử vào giữa */
     transform: translateX(-50%); /* Dịch ngược lại 50% chiều rộng để căn giữa */
     background: #1e293b;
     padding: 15px;
@@ -100,7 +102,40 @@ body {
     max-width: 400px;
     border-radius: 10px;
     background-color: transparent;
+    z-index: 1;
 }
+
+#chat-container {
+    position: absolute;
+    bottom: 2px; 
+    left: 48%;  /* Đưa điểm gốc vào giữa */
+    transform: translateX(-50%); /* Dịch ngược lại 50% chiều rộng */
+    background: #1e293b;
+    padding: 15px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    background-color: transparent;
+    transition: bottom 0.5s ease-in-out; /* Hiệu ứng mượt */
+}
+
+
+/* Khi màn hình nhỏ hơn 600px (điện thoại) => Đưa thanh lên trên */
+@media screen and (max-width: 600px) {
+    #chat-container {
+        bottom: 50px;
+        left: 44%;
+    }
+}
+
+/* Khi màn hình nhỏ hơn 400px (rất nhỏ) => Đưa lên cao hơn nữa */
+@media screen and (max-width: 400px) {
+    #chat-container {
+        bottom: 100px;
+    }
+}
+
 
 #loading{
     position: fixed; /* Giữ vị trí trên cùng */
@@ -184,6 +219,7 @@ body {
     justify-content: center;
     gap: 1px;
     position: fixed;
+    z-index: 1;
 }
 
 /* Nút bấm */
@@ -443,17 +479,20 @@ body {
     transform: scale(1.2);
 }
 
+
 #title-song {
     position: absolute;
     font-size: 9px;
+    width: 400px;
     top: 27%;
     margin: 0;
     font-family: 'PixelFont', cursive;
     color: white;
-    background:transparent;
+    background: transparent;
     padding: 10px 20px;
     text-transform: uppercase;
 }
+
 
 #rain-effect {
     position: fixed;
@@ -519,17 +558,27 @@ body {
 }
 
 
+@keyframes flashEffect {
+    0% {
+        opacity: 0.99;
+    }
+    50% {
+        opacity: 1;
+        background-color: rgba(255, 255, 255, 0.8); /* Màu trắng sáng */
+    }
+    100% {
+        opacity: 0.99;
+    }
+}
+
 #storm-effect {
     position: fixed;
-    width: 50vw; /* Kích thước nhỏ hơn */
-    height: 50vh;
-    opacity: 2; /* Rõ hơn */
-    background: url('assets/gifs/storm.gif') no-repeat center center;
-    background-size: auto;
+    width: 100vw;
+    height: 100vh;
     z-index: 1000;
-
-    /* Ẩn mặc định */
-    display: none;
+    display: none; /* Ẩn mặc định */
+    animation: flashEffect 0.1s ease-in-out;
+    z-index: 0;
 }
 
 /* Animation từ góc trên xuống */
@@ -563,15 +612,36 @@ body {
 #display-container {
     position: absolute;
     top:10%;
-    width: 300px;
+    width: 500px;
     height: 150px;
     background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
+    z-index: 1;
     margin: 0 auto; /* Căn giữa theo chiều ngang */
+}
+#welcome-screen {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); /* Màu đen trong suốt 50% */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    text-align: center;
+    z-index: 9999;
+    transition: opacity 1s ease-in-out; /* Hiệu ứng mờ dần */
+}
+
+/* Khi ẩn màn hình chờ, làm mờ dần */
+#welcome-screen.hidden {
+    opacity: 0;
+    pointer-events: none; /* Không cho tương tác */
+    display: none;
 }
 
 
