@@ -121,7 +121,6 @@ body {
 }
 
 
-/* Khi màn hình nhỏ hơn 600px (điện thoại) => Đưa thanh lên trên */
 @media screen and (max-width: 600px) {
     #chat-container {
         bottom: 50px;
@@ -129,12 +128,14 @@ body {
     }
 }
 
-/* Khi màn hình nhỏ hơn 400px (rất nhỏ) => Đưa lên cao hơn nữa */
+/* Khi màn hình nhỏ hơn 400px */
 @media screen and (max-width: 400px) {
     #chat-container {
         bottom: 100px;
     }
 }
+
+
 
 
 #loading{

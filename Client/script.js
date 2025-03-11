@@ -3,12 +3,30 @@ import { backgrounds } from "./background.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     const chatInput = document.getElementById("chat-input");
-    const effectButtons = document.querySelectorAll(".select-effect .emotion");
-    const audio = new Audio(songs.happy[0].file);
     window.toggleSelection = toggleSelection;
     window.togglePopup = togglePopup;
     const effect = ['rain', 'storm', 'wind', 'snow', " "];
     let currentEffect = '';
+
+    function updatePlaceholder() {
+        const input = document.getElementById("chat-input");
+    
+        if (input) {
+            if (window.innerWidth <= 600) {
+                input.placeholder = "Nhập tâm sự...";
+            } else {
+                input.placeholder = "Ngày hôm nay của bạn như nào?";
+            }
+        }
+    }
+    
+    // Chạy khi DOM đã sẵn sàng
+    document.addEventListener("DOMContentLoaded", updatePlaceholder);
+    
+    // Lắng nghe sự thay đổi kích thước cửa sổ
+    window.addEventListener("resize", updatePlaceholder);
+    
+    
 
 
     chatInput.addEventListener("keypress", async function (event) { // 🟢 THÊM async
@@ -31,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
                 let data = await response.json();
                 console.log("Phản hồi từ API:", data);
-                currentEmotion = data.result.toLowerCase();
+                let currentEmotion = data.result.toLowerCase();
                 console.log(currentEmotion)
                 const possibilitiesObj = data.possibilities[0];  // Lấy object trong mảng
                 console.log("Possibilities Object:", possibilitiesObj);
@@ -252,10 +270,7 @@ function changeBackground(emotion) {
         };
 
         lastBg = randomBg;
-        currentEmotion = emotion;
     }, 300); // Chờ fade-out hoàn tất trước khi đổi ảnh
-    isPlaying= true;
-    updatePlayPauseIcon()
 }
 
 function adjustBrightness() {
