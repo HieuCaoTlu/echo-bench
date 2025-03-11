@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // Lắng nghe sự thay đổi kích thước cửa sổ
     window.addEventListener("resize", updatePlaceholder);
+
+    document.addEventListener("click", updatePlaceholder, { once: true });
     
     
 
@@ -173,6 +175,7 @@ function startApp(event) {
 document.addEventListener("click", startApp, { once: true });
 
 
+
 function setDefaultBackground() {
     changeBackground('neutral')
     };
@@ -278,8 +281,8 @@ function adjustBrightness() {
     const title = document.getElementById('title')
     const titleSong = document.getElementById('title-song')
     if (bgColor === "black"){
-         title.style.color = 'rgba(0, 0, 0, 0.4)';
-         titleSong.style.color = 'rgba(0, 0, 0, 0.4)';
+         title.style.color = 'rgba(0, 0, 0, 0.8)';
+         titleSong.style.color = 'rgba(0, 0, 0, 0.8)';
     }
     else {
         title.style.color = 'white';
